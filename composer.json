@@ -1,0 +1,18 @@
+{
+    "name": "lasalle/ejemplo-sesion-2",
+    "authors": [
+
+    ],
+    "require": {
+        "php": "^7.4"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^8.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "Example\\": "src/",
+            "ExampleTest\\": "test/"
+        }
+    }
+}
