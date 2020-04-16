@@ -7,6 +7,7 @@ namespace ExampleTest\Application;
 use Example\Application\CreateUser;
 use Example\Domain\Exceptions\InvalidUsernameException;
 use Example\Domain\User;
+use ExampleTest\Infrastructure\UsernameRepositoryDummy;
 use ExampleTest\Infrastructure\UsernameRepositoryStub;
 use ExampleTest\Infrastructure\UsernameValidatorInvalidStub;
 use ExampleTest\Infrastructure\UsernameValidatorValidStub;
