@@ -7,11 +7,12 @@ namespace ExampleTest\Application;
 use Example\Application\CreateUser;
 use Example\Domain\Exceptions\InvalidUsernameException;
 use Example\Domain\User;
+use Example\Domain\UserNameValidator;
 use ExampleTest\Infrastructure\UsernameRepositoryDummy;
 use ExampleTest\Infrastructure\UsernameRepositoryStub;
-use ExampleTest\Infrastructure\UsernameValidatorInvalidStub;
-use ExampleTest\Infrastructure\UsernameValidatorValidStub;
+
 use PHPUnit\Framework\TestCase;
+use Example\Domain\UserRepository;
 
 final class CreateUserTest extends TestCase
 {
@@ -21,11 +22,28 @@ final class CreateUserTest extends TestCase
     public function shouldCreateAuser()
     {
         $userRepository = new UsernameRepositoryStub();
-        $usernameValidator = new UsernameValidatorValidStub();
+        $usernameValidator = new UserNameValidator();
+        
         $createUser = new CreateUser($userRepository, $usernameValidator);
 
-        $expectedUser = new User('validUsername', '123456');
-        $actualUser = $createUser('validUsername', '123456');
+        $repositoryUser = \Mockery::mock(UserRepository::class);
+
+        $expectedUser = new User('validUsername', '123456', 'email@prueba');
+        
+
+        $repositoryUser
+            ->shouldReceive('create')
+            ->once()
+            ->with($expectedUser)
+            ->andReturnNull();
+
+        $repositoryUser
+            ->shouldReceive('findUser')
+            ->once()
+            ->with($expectedUser->username())
+            ->andReturnNull();
+
+        $actualUser = $createUser('validUsername', '123456', 'email@prueba');
 
         $this->assertEquals($expectedUser, $actualUser);
     }
@@ -33,10 +51,10 @@ final class CreateUserTest extends TestCase
     public function testShouldThrowExceptionWhenUsernameIsInvalid(){
         $this->expectException(InvalidUsernameException::class);
         $userRepository = new UsernameRepositoryDummy();
-        $usernameValidator = new UsernameValidatorInvalidStub();
+        $usernameValidator = new UserNameValidator();
         $createUser = new CreateUser($userRepository, $usernameValidator);
 
-        $createUser('invalidUsername','123456');
+        $createUser('#invalidUsername','123456', 'email@prueba');
     }
 
 }

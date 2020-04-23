@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Example\Application;
 
+use Example\Domain\Exceptions\InvalidUserExistException;
 use Example\Domain\User;
 use Example\Domain\UserNameValidator;
 use Example\Domain\UserRepository;
@@ -19,11 +20,15 @@ final class CreateUser
         $this->usernameValidator = $usernameValidator;
     }
 
-    public function __invoke(string $username, string $password): User
+    public function __invoke(string $username, string $password, string $email): User
     {
         $this->usernameValidator->validate($username);
 
-        $user = new User($username, $password);
+        if (null !== $this->userRepository->findUser($username)){
+            throw new InvalidUserExistException();
+        }
+        
+        $user = new User($username, $password, $email);
         $this->userRepository->create($user);
         return $user;
     }

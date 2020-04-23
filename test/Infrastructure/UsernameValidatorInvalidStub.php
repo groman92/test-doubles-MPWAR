@@ -6,9 +6,9 @@ namespace ExampleTest\Infrastructure;
 
 
 use Example\Domain\Exceptions\InvalidUsernameException;
-use Example\Domain\UserNameValidator;
 
-final class UsernameValidatorInvalidStub implements UserNameValidator
+
+final class UsernameValidatorInvalidStub
 {
 
     public function validate(string $username): void

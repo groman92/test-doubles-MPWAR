@@ -15,4 +15,10 @@ final class UsernameRepositoryDummy implements UserRepository
     {
         // TODO: Implement create() method.
     }
+
+    public function findUser(string $user): ?User
+    {
+        // TODO: Implement create() method.
+        return null;
+    }
 }

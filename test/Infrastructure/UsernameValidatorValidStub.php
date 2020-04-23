@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace ExampleTest\Infrastructure;
 
 
-use Example\Domain\UserNameValidator;
 
-final class UsernameValidatorValidStub implements UserNameValidator
+
+final class UsernameValidatorValidStub
 {
     public function validate(string $username): void
     {

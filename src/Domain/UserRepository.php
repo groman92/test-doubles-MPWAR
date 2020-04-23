@@ -9,4 +9,5 @@ use Example\Domain\User;
 interface UserRepository
 {
     public function create(User $user):void;
+    public function findUser(string $user):?User;
 }

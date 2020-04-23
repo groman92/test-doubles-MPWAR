@@ -1,0 +1,1 @@
+C:37:"PHPUnit\Runner\DefaultTestResultCache":315:{a:2:{s:7:"defects";a:1:{s:85:"ExampleTest\Application\CreateUserTest::testShouldThrowExceptionWhenUsernameIsInvalid";i:3;}s:5:"times";a:2:{s:57:"ExampleTest\Application\CreateUserTest::shouldCreateAuser";d:0.072;s:85:"ExampleTest\Application\CreateUserTest::testShouldThrowExceptionWhenUsernameIsInvalid";d:0.005;}}}
